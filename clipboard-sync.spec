@@ -16,7 +16,7 @@ Synchronizes PRIMARY and CLIPBOARD selections bidirectionally, allowing
 highlighted text and copied text to be pasted with either Ctrl+V or Shift+Insert.
 
 %prep
-%setup -q
+# Files are already present from git checkout, no extraction needed
 
 %build
 # Nothing to build
@@ -25,15 +25,15 @@ highlighted text and copied text to be pasted with either Ctrl+V or Shift+Insert
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_userunitdir}
 
-install -m 0755 clipboard-sync.sh %{buildroot}%{_bindir}/clipboard-sync
-install -m 0755 clipboard-reverse-sync.sh %{buildroot}%{_bindir}/clipboard-reverse-sync
+install -m 0755 %{_builddir}/clipboard-sync-%{version}-build/clipboard-sync.sh %{buildroot}%{_bindir}/clipboard-sync
+install -m 0755 %{_builddir}/clipboard-sync-%{version}-build/clipboard-reverse-sync.sh %{buildroot}%{_bindir}/clipboard-reverse-sync
 
-install -m 0644 clipboard-sync.service %{buildroot}%{_userunitdir}/clipboard-sync.service
-install -m 0644 clipboard-reverse-sync.service %{buildroot}%{_userunitdir}/clipboard-reverse-sync.service
+install -m 0644 %{_builddir}/clipboard-sync-%{version}-build/clipboard-sync.service %{buildroot}%{_userunitdir}/clipboard-sync.service
+install -m 0644 %{_builddir}/clipboard-sync-%{version}-build/clipboard-reverse-sync.service %{buildroot}%{_userunitdir}/clipboard-reverse-sync.service
 
 %files
-%license LICENSE
-%doc README.md
+%license %{_builddir}/clipboard-sync-%{version}-build/LICENSE
+%doc %{_builddir}/clipboard-sync-%{version}-build/README.md
 %{_bindir}/clipboard-sync
 %{_bindir}/clipboard-reverse-sync
 %{_userunitdir}/clipboard-sync.service
