@@ -1,6 +1,6 @@
 Name:           clipboard-sync
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Bidirectional clipboard synchronization for X11/Wayland
 
 License:        MIT
