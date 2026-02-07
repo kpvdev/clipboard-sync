@@ -1,6 +1,6 @@
 srpm:
-	mkdir -p $(outdir)
-	cp *.sh *.service LICENSE README.md $(spec) $(outdir)/
+	dnf install -y git
+	git archive --format=tar.gz --prefix=clipboard-sync-1.0.0/ HEAD > $(outdir)/clipboard-sync-1.0.0.tar.gz
 	rpmbuild -bs $(spec) \
 		--define "_sourcedir $(outdir)" \
 		--define "_specdir $(outdir)" \

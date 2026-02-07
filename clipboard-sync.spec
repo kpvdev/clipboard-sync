@@ -5,6 +5,7 @@ Summary:        Bidirectional clipboard synchronization for X11/Wayland
 
 License:        MIT
 URL:            https://github.com/kpvdev/clipboard-sync
+Source0:        %{name}-%{version}.tar.gz
 
 Requires:       xclip
 Requires:       systemd
@@ -16,7 +17,7 @@ Synchronizes PRIMARY and CLIPBOARD selections bidirectionally, allowing
 highlighted text and copied text to be pasted with either Ctrl+V or Shift+Insert.
 
 %prep
-# Files are already present from git checkout
+%setup -q
 
 %build
 # Nothing to build
