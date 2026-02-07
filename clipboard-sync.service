@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync PRIMARY selection to clipboard
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=/usr/bin/clipboard-sync
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
