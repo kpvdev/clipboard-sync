@@ -12,7 +12,7 @@ Bidirectional clipboard synchronization for Linux (X11/GNOME/Wayland).
 
 ### Fedora (via COPR)
 ```bash
-sudo dnf copr enable YOUR_USERNAME/clipboard-sync
+sudo dnf copr enable kpvdev/clipboard-sync
 sudo dnf install clipboard-sync
 ```
 
