@@ -7,6 +7,8 @@ License:        MIT
 URL:            https://github.com/kpvdev/clipboard-sync
 Source0:        %{name}-%{version}.tar.gz
 
+BuildRequires:  systemd-rpm-macros
+
 Requires:       systemd
 Requires:       xclip
 
