@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 #
 # clipboard-sync: Bidirectional sync between PRIMARY and CLIPBOARD selections.
-# Auto-detects Wayland vs X11 and uses the appropriate tools.
 #
-# On Wayland, reads via xclip (through XWayland, avoids flicker) and
-# writes via wl-copy (native Wayland). Debounces to avoid interfering
-# with active text highlighting.
+# Uses xclip for all clipboard I/O (works on both X11 and Wayland via
+# XWayland bridge). Debounces to avoid interfering with active text
+# highlighting.
 #
 
 POLL_INTERVAL=0.3
@@ -15,14 +14,8 @@ export DISPLAY="${DISPLAY:-:0}"
 
 get_primary()   { xclip -o -selection primary 2>/dev/null; }
 get_clipboard() { xclip -o -selection clipboard 2>/dev/null; }
-
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    set_primary()   { wl-copy --primary -- "$1"; }
-    set_clipboard() { wl-copy -- "$1"; }
-else
-    set_primary()   { printf '%s' "$1" | xclip -i -selection primary; }
-    set_clipboard() { printf '%s' "$1" | xclip -i -selection clipboard; }
-fi
+set_primary()   { printf '%s' "$1" | xclip -i -selection primary; }
+set_clipboard() { printf '%s' "$1" | xclip -i -selection clipboard; }
 
 last_synced_primary=""
 last_synced_clipboard=""

@@ -1,7 +1,7 @@
 Name:           clipboard-sync
 Version:        1.1.0
 Release:        1%{?dist}
-Summary:        Bidirectional clipboard synchronization for X11/Wayland
+Summary:        Bidirectional clipboard synchronization for X11/XWayland
 
 License:        MIT
 URL:            https://github.com/kpvdev/clipboard-sync
@@ -9,14 +9,13 @@ Source0:        %{name}-%{version}.tar.gz
 
 Requires:       systemd
 Requires:       xclip
-Requires:       (wl-clipboard if wayland-protocols)
 
 BuildArch:      noarch
 
 %description
 Synchronizes PRIMARY and CLIPBOARD selections bidirectionally, allowing
 highlighted text and copied text to be pasted with either Ctrl+V or Shift+Insert.
-Automatically detects Wayland or X11 and uses the appropriate clipboard tools.
+Uses xclip and works on X11 and Wayland sessions with XWayland.
 
 %prep
 %setup -q
@@ -52,10 +51,10 @@ fi
 %changelog
 * Sat Feb 07 2026 Kyle P. Vincent <kpvdev@users.noreply.github.com> - 1.1.0-1
 - Merge forward and reverse sync into single bidirectional script
-- Auto-detect Wayland vs X11 session type
-- Read via xclip (avoids Wayland compositor flicker), write via wl-copy on Wayland
+- Use xclip for all I/O (works on X11 and Wayland via XWayland)
 - Debounce selection changes to avoid interfering with active highlighting
 - Eliminate race condition between two independent polling loops
+- Drop wl-clipboard dependency
 
 * Fri Feb 07 2025 Kyle P. Vincent <kpvdev@users.noreply.github.com> - 1.0.0-1
 - Initial package release
